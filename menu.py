@@ -30,9 +30,28 @@ resources = {
     "coffee": 100,
 }
 
-def checkResources(drinkId,resources):
+#funcao que associa cada numero ao respectivo drink
+def associateIDWithDrink(drinkId):
     if drinkId==1:
-        if MENU["espresso"]
+        return MENU["espresso"]
+
+#funcao que checa se há ingredientes o suficiente para fazer tal bebida
+def checkResources(drink,resources):
+    for item in drink["ingredients"]:
+        if item[""] > resources[item]:
+            print("There's not enough ingredients! Maybe try another drink? ")
+
+#funcao que checa se as moedas que o cliente inseriu sao o suficiente
+def checkCoins(quarter,dimes,nickles,pennie,drink):
+    total = (quarter * 0.25) + (dimes * 0.1) + (nickles * 0.05) + (pennie * 0.01)
+    if total >= drink["cost"]:
+        return total
+    else:
+        return print("Not enough money! Coins refunded")       
+
+
+
+    
 
 
 
