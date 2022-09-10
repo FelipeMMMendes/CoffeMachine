@@ -1,3 +1,5 @@
+import os
+
 MENU = {
     "espresso": {
         "ingredients": {
@@ -25,21 +27,42 @@ MENU = {
 }
 
 resources = {
-    "water": 300,
-    "milk": 200,
-    "coffee": 100,
+
+#300,200,100
+
+    "water": 1000,
+    "milk": 600,
+    "coffee": 700,
 }
 
 #funcao que associa cada numero ao respectivo drink
 def associateIDWithDrink(drinkId):
-    if drinkId==1:
+    if drinkId=='1':
         return MENU["espresso"]
+    elif drinkId=='2':
+        return MENU["latte"]
+    elif drinkId=='3':
+        return MENU["cappuccino"]
+    else:
+        return False
+                    
 
 #funcao que checa se há ingredientes o suficiente para fazer tal bebida
 def checkResources(drink,resources):
     for item in drink["ingredients"]:
-        if item[""] > resources[item]:
-            print("There's not enough ingredients! Maybe try another drink? ")
+        if drink["ingredients"][item] > resources[item]:
+            os.system("cls")
+            print("Not enough, maybe try another drink? ")
+            return False
+        else:
+            return True
+
+#funcao que desconta os ingredientes de acordo com a bebida escolhida
+def useIngredients(drink,resources):
+    for item in drink["ingredients"]:
+        resources[item] -= drink["ingredients"][item]
+    return resources     
+
 
 #funcao que checa se as moedas que o cliente inseriu sao o suficiente
 def checkCoins(quarter,dimes,nickles,pennie,drink):
@@ -47,7 +70,7 @@ def checkCoins(quarter,dimes,nickles,pennie,drink):
     if total >= drink["cost"]:
         return total
     else:
-        return print("Not enough money! Coins refunded")       
+        return False       
 
 
 
